@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowUpRight, Phone, MessageCircle } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { brand } from '../data/content';
 import Magnetic from './Magnetic';
@@ -185,20 +185,10 @@ export default function Header() {
 
               <div className="flex items-center gap-6 text-sm text-[#CFC2B0] font-light">
                 <a
-                  href={`https://wa.me/${brand.contact.whatsapp}?text=${encodeURIComponent(brand.contact.whatsappMessage)}`}
-                  target="_blank"
-                  rel="noreferrer"
+                  href={`mailto:${brand.contact.email}`}
                   className="flex items-center gap-1.5 hover:text-[#B08D57]"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  <span>WhatsApp</span>
-                </a>
-                <a
-                  href={`tel:${brand.contact.phone.replace(/[^0-9+]/g, '')}`}
-                  className="flex items-center gap-1.5 hover:text-[#B08D57]"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>Call Atelier</span>
+                  <span>{brand.contact.email}</span>
                 </a>
               </div>
             </div>

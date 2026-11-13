@@ -7,7 +7,6 @@ import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import WhatsAppButton from './components/WhatsAppButton';
 
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
@@ -54,7 +53,6 @@ export default function App() {
             <AnimatedRoutes />
           </main>
           <Footer />
-          <WhatsAppButton />
         </div>
       </SmoothScroll>
     </BrowserRouter>

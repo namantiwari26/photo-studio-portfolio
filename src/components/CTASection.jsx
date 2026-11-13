@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MessageCircle, ArrowUpRight, Phone } from 'lucide-react';
+import { ArrowUpRight, Mail } from 'lucide-react';
 import { brand } from '../data/content';
 import OrnamentDivider from './OrnamentDivider';
 import Magnetic from './Magnetic';
 
 export default function CTASection() {
-  const whatsappUrl = `https://wa.me/${brand.contact.whatsapp}?text=${encodeURIComponent(brand.contact.whatsappMessage)}`;
-
   return (
     <section className="py-24 md:py-32 bg-[#F7F2EA] border-b border-[#7A6F64]/10 text-center relative overflow-hidden">
       <div className="max-w-3xl mx-auto px-5 sm:px-8 relative z-10">
@@ -27,39 +25,41 @@ export default function CTASection() {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <Magnetic strength={0.25}>
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#26211D] text-[#F7F2EA] hover:bg-[#B08D57] transition-all duration-300 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2.5 shadow-md"
-            >
-              <MessageCircle className="w-4 h-4 text-[#B08D57]" />
-              <span>Connect on WhatsApp</span>
-            </a>
-          </Magnetic>
-
-          <Magnetic strength={0.25}>
             <Link
               to="/contact"
-              className="w-full sm:w-auto px-8 py-4 rounded-full border border-[#2A2420] text-[#2A2420] hover:bg-[#2A2420] hover:text-[#F7F2EA] transition-all duration-300 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#26211D] text-[#F7F2EA] hover:bg-[#B08D57] transition-all duration-300 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2.5 shadow-md"
             >
-              <span>Consultation Form</span>
+              <span>Consultation & Inquiries</span>
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </Magnetic>
+
+          <Magnetic strength={0.25}>
+            <a
+              href={`mailto:${brand.contact.email}`}
+              className="w-full sm:w-auto px-8 py-4 rounded-full border border-[#2A2420] text-[#2A2420] hover:bg-[#2A2420] hover:text-[#F7F2EA] transition-all duration-300 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2"
+            >
+              <Mail className="w-4 h-4" />
+              <span>Email Atelier</span>
+            </a>
+          </Magnetic>
         </div>
 
-        <div className="mt-8 text-xs text-[#7A6F64] font-light flex items-center justify-center gap-2">
-          <span>Or call directly:</span>
+        <div className="mt-8 text-xs text-[#7A6F64] font-light flex flex-wrap items-center justify-center gap-2">
+          <span>Direct inquiries:</span>
           <a
-            href={`tel:${brand.contact.phone.replace(/[^0-9+]/g, '')}`}
+            href={`mailto:${brand.contact.email}`}
             className="text-[#2A2420] font-medium hover:text-[#B08D57] underline decoration-[#B08D57]/40"
           >
-            {brand.contact.phoneDisplay}
+            {brand.contact.email}
           </a>
+          <span>•</span>
+          <span>Studio line:</span>
+          <span className="text-[#2A2420] font-medium font-mono">
+            {brand.contact.phoneDisplay}
+          </span>
         </div>
       </div>
     </section>
   );
 }
-

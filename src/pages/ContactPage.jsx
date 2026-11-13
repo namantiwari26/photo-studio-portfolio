@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { 
   Calendar as CalendarIcon, 
@@ -6,13 +6,12 @@ import {
   Phone, 
   Mail, 
   Clock, 
-  MessageCircle, 
   CheckCircle2, 
   Send, 
   AlertCircle,
   ArrowRight
 } from 'lucide-react';
-import { format, isSameDay } from 'date-fns';
+import { isSameDay } from 'date-fns';
 import confetti from 'canvas-confetti';
 import PageTransition from '../components/PageTransition';
 import OrnamentDivider from '../components/OrnamentDivider';
@@ -37,7 +36,7 @@ export default function ContactPage() {
     fullName: '',
     email: '',
     phone: '',
-    preferredContact: 'WhatsApp',
+    preferredContact: 'Email',
   });
 
   const blockedDates = brand.blockedDemoDates;
@@ -71,10 +70,6 @@ export default function ContactPage() {
       }
     }, 800);
   };
-
-  const whatsappDirectUrl = `https://wa.me/${brand.contact.whatsapp}?text=${encodeURIComponent(
-    `Hello Aurelia Studio, I would like to inquire about dates for our ${formData.eventType}.\nName: ${formData.fullName || 'Prospective Client'}\nDate: ${formData.selectedDate}\nLocation: ${formData.location || 'India'}\nBudget: ${formData.budgetRange}`
-  )}`;
 
   return (
     <PageTransition>
@@ -110,17 +105,15 @@ export default function ContactPage() {
                   </p>
                   <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                     <a
-                      href={whatsappDirectUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-6 py-3 rounded-full bg-[#26211D] text-[#F7F2EA] hover:bg-[#B08D57] text-xs uppercase tracking-wider font-medium flex items-center gap-2"
+                      href={`mailto:${brand.contact.email}`}
+                      className="px-6 py-3 rounded-full bg-[#26211D] text-[#F7F2EA] hover:bg-[#B08D57] text-xs uppercase tracking-wider font-medium flex items-center gap-2 transition-colors"
                     >
-                      <MessageCircle className="w-4 h-4 text-[#B08D57]" />
-                      <span>Follow Up on WhatsApp</span>
+                      <Mail className="w-4 h-4 text-[#B08D57]" />
+                      <span>Write to Concierge ({brand.contact.email})</span>
                     </a>
                     <button
                       onClick={() => setSubmitted(false)}
-                      className="px-6 py-3 rounded-full border border-[#7A6F64]/20 text-xs text-[#7A6F64] hover:text-[#2A2420]"
+                      className="px-6 py-3 rounded-full border border-[#7A6F64]/20 text-xs text-[#7A6F64] hover:text-[#2A2420] cursor-pointer"
                     >
                       Submit Another Note
                     </button>
@@ -226,7 +219,7 @@ export default function ContactPage() {
                         <button
                           type="button"
                           onClick={() => setStep(2)}
-                          className="py-3 px-6 rounded-full bg-[#26211D] text-[#F7F2EA] text-xs uppercase tracking-wider font-medium flex items-center gap-2 hover:bg-[#B08D57] transition-colors"
+                          className="py-3 px-6 rounded-full bg-[#26211D] text-[#F7F2EA] text-xs uppercase tracking-wider font-medium flex items-center gap-2 hover:bg-[#B08D57] transition-colors cursor-pointer"
                         >
                           <span>Next: Vision & Budget</span>
                           <ArrowRight className="w-4 h-4" />
@@ -271,14 +264,14 @@ export default function ContactPage() {
                         <button
                           type="button"
                           onClick={() => setStep(1)}
-                          className="text-xs uppercase tracking-wider text-[#7A6F64] hover:text-[#2A2420]"
+                          className="text-xs uppercase tracking-wider text-[#7A6F64] hover:text-[#2A2420] cursor-pointer"
                         >
                           Back
                         </button>
                         <button
                           type="button"
                           onClick={() => setStep(3)}
-                          className="py-3 px-6 rounded-full bg-[#26211D] text-[#F7F2EA] text-xs uppercase tracking-wider font-medium flex items-center gap-2 hover:bg-[#B08D57] transition-colors"
+                          className="py-3 px-6 rounded-full bg-[#26211D] text-[#F7F2EA] text-xs uppercase tracking-wider font-medium flex items-center gap-2 hover:bg-[#B08D57] transition-colors cursor-pointer"
                         >
                           <span>Next: Contact Details</span>
                           <ArrowRight className="w-4 h-4" />
@@ -321,12 +314,12 @@ export default function ContactPage() {
 
                         <div>
                           <label className="block text-[11px] uppercase tracking-wider text-[#7A6F64] mb-1 font-medium">
-                            Phone / WhatsApp *
+                            Phone Number *
                           </label>
                           <input
-                            type="tel"
+                            type="text"
                             required
-                            placeholder="+91 98200 00000"
+                            placeholder="+91 98XXX XXXXX"
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             className="w-full px-4 py-3 rounded-xl bg-[#F7F2EA] border border-[#7A6F64]/20 text-xs text-[#2A2420] placeholder-[#7A6F64]/50 focus:outline-none focus:border-[#B08D57]"
@@ -343,23 +336,23 @@ export default function ContactPage() {
                             <input
                               type="radio"
                               name="pref"
-                              value="WhatsApp"
-                              checked={formData.preferredContact === 'WhatsApp'}
-                              onChange={() => setFormData({ ...formData, preferredContact: 'WhatsApp' })}
-                              className="accent-[#B08D57]"
-                            />
-                            <span>WhatsApp (Fastest response)</span>
-                          </label>
-                          <label className="flex items-center gap-2 cursor-pointer">
-                            <input
-                              type="radio"
-                              name="pref"
                               value="Email"
                               checked={formData.preferredContact === 'Email'}
                               onChange={() => setFormData({ ...formData, preferredContact: 'Email' })}
                               className="accent-[#B08D57]"
                             />
-                            <span>Formal Email</span>
+                            <span>Formal Email ({brand.contact.email})</span>
+                          </label>
+                          <label className="flex items-center gap-2 cursor-pointer">
+                            <input
+                              type="radio"
+                              name="pref"
+                              value="Phone"
+                              checked={formData.preferredContact === 'Phone'}
+                              onChange={() => setFormData({ ...formData, preferredContact: 'Phone' })}
+                              className="accent-[#B08D57]"
+                            />
+                            <span>Phone Consultation</span>
                           </label>
                         </div>
                       </div>
@@ -368,7 +361,7 @@ export default function ContactPage() {
                         <button
                           type="button"
                           onClick={() => setStep(2)}
-                          className="text-xs uppercase tracking-wider text-[#7A6F64] hover:text-[#2A2420]"
+                          className="text-xs uppercase tracking-wider text-[#7A6F64] hover:text-[#2A2420] cursor-pointer"
                         >
                           Back
                         </button>
@@ -389,33 +382,28 @@ export default function ContactPage() {
 
             {/* Right Column: Contact Details, Map Placeholder & Direct Actions */}
             <div className="lg:col-span-5 space-y-8">
-              {/* Direct Buttons */}
+              {/* Direct Inquiry Options */}
               <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#7A6F64]/15 shadow-sm space-y-4">
                 <h3 className="font-serif text-2xl text-[#2A2420] font-light">
-                  Instant Direct Inquiries
+                  Direct Inquiries
                 </h3>
                 <p className="text-xs text-[#7A6F64] font-light leading-relaxed">
-                  For immediate calendar checks, urgent weekend dates, or wedding planner queries:
+                  For calendar verification, formal commission briefs, or wedding planner queries:
                 </p>
 
                 <div className="flex flex-col gap-3 pt-2">
                   <a
-                    href={`https://wa.me/${brand.contact.whatsapp}?text=${encodeURIComponent(brand.contact.whatsappMessage)}`}
-                    target="_blank"
-                    rel="noreferrer"
+                    href={`mailto:${brand.contact.email}`}
                     className="w-full py-3.5 px-5 rounded-xl bg-[#26211D] text-[#F7F2EA] text-xs uppercase tracking-widest font-medium flex items-center justify-center gap-2.5 hover:bg-[#B08D57] transition-colors"
                   >
-                    <MessageCircle className="w-4 h-4 text-[#B08D57]" />
-                    <span>Chat on WhatsApp</span>
+                    <Mail className="w-4 h-4 text-[#B08D57]" />
+                    <span>Email Atelier ({brand.contact.email})</span>
                   </a>
 
-                  <a
-                    href={`tel:${brand.contact.phone.replace(/[^0-9+]/g, '')}`}
-                    className="w-full py-3.5 px-5 rounded-xl border border-[#2A2420] text-[#2A2420] text-xs uppercase tracking-widest font-medium flex items-center justify-center gap-2 hover:bg-[#2A2420] hover:text-white transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span>Call Studio ({brand.contact.phoneDisplay})</span>
-                  </a>
+                  <div className="w-full py-3.5 px-5 rounded-xl border border-[#7A6F64]/20 bg-[#F7F2EA] text-[#2A2420] text-xs tracking-wider font-medium flex items-center justify-center gap-2">
+                    <Phone className="w-4 h-4 text-[#B08D57]" />
+                    <span>Studio Line: <strong className="font-mono">{brand.contact.phoneDisplay}</strong></span>
+                  </div>
                 </div>
               </div>
 
@@ -494,4 +482,3 @@ export default function ContactPage() {
     </PageTransition>
   );
 }
-

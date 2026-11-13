@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Calendar as CalendarIcon, CheckCircle2, Send, MessageCircle } from 'lucide-react';
+import { Calendar as CalendarIcon, CheckCircle2, Send, Mail } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { brand } from '../data/content';
 
@@ -36,11 +36,6 @@ export default function BookingCard({ className = "", prefillService = "" }) {
     }, 700);
   };
 
-  const createWhatsAppLink = () => {
-    const text = `Hello Aurelia Studio, I'm submitting an inquiry:\n- Name: ${formData.fullName}\n- Event: ${formData.eventType}\n- Date: ${formData.eventDate || 'To be decided'}\n- Guests: ${formData.guestCount || 'Not specified'}\n- City/Venue: ${formData.location || 'India / Destination'}`;
-    return `https://wa.me/${brand.contact.whatsapp}?text=${encodeURIComponent(text)}`;
-  };
-
   return (
     <div
       className={`glass-assessment-card rounded-2xl p-6 md:p-8 text-[#2A2420] transition-all duration-300 relative ${className}`}
@@ -58,17 +53,15 @@ export default function BookingCard({ className = "", prefillService = "" }) {
           </p>
           <div className="pt-2 flex flex-col gap-2">
             <a
-              href={createWhatsAppLink()}
-              target="_blank"
-              rel="noreferrer"
+              href={`mailto:${brand.contact.email}`}
               className="w-full py-3 px-4 rounded-xl bg-[#26211D] text-[#F7F2EA] text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#B08D57] transition-colors"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Connect on WhatsApp Now</span>
+              <Mail className="w-4 h-4" />
+              <span>Contact Concierge ({brand.contact.email})</span>
             </a>
             <button
               onClick={() => setSubmitted(false)}
-              className="text-xs text-[#7A6F64] hover:text-[#2A2420] underline decoration-[#B08D57]/40 pt-2"
+              className="text-xs text-[#7A6F64] hover:text-[#2A2420] underline decoration-[#B08D57]/40 pt-2 cursor-pointer"
             >
               Send another note
             </button>

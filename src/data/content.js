@@ -8,10 +8,10 @@ export const brand = {
   description: "An editorial visual studio focused on human connection, quiet intimacy, and heritage celebrations across India and destinations worldwide.",
   
   contact: {
-    phone: "+91 98201 44520",
-    phoneDisplay: "+91 98201 44520",
-    whatsapp: "919820144520",
-    whatsappMessage: "Hello Aurelia Studio, I would like to inquire about dates and availability for our upcoming celebration.",
+    phone: "+91 98XXX XXXXX",
+    phoneDisplay: "+91 98XXX XXXXX",
+    whatsapp: "",
+    whatsappMessage: "",
     email: "hello@aureliastudio.in",
     bookingEmail: "inquiries@aureliastudio.in",
     address: {
@@ -54,7 +54,7 @@ export const brand = {
       step: "01",
       name: "Inquire",
       title: "Share your vision",
-      description: "Send us your dates, venue plans, and aesthetic preferences through our consultation form or a quick WhatsApp note.",
+      description: "Send us your dates, venue plans, and aesthetic preferences through our consultation form or a direct email note.",
     },
     {
       step: "02",
