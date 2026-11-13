@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+@import "@fontsource/bodoni-moda/400.css";
+@import "@fontsource/bodoni-moda/500.css";
+@import "@fontsource/bodoni-moda/600.css";
+@import "@fontsource/bodoni-moda/700.css";
+@import "@fontsource/bodoni-moda/400-italic.css";
+
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+
+@import "@fontsource/jost/300.css";
+@import "@fontsource/jost/400.css";
+@import "@fontsource/jost/500.css";
+@import "@fontsource/jost/600.css";
+
+@theme {
+  --color-ivory: #F7F2EA;
+  --color-warm-white: #FFFFFF;
+  --color-sand: #ECE3D6;
+  --color-soft-taupe: #CFC2B0;
+  --color-espresso: #2A2420;
+  --color-muted-text: #7A6F64;
+  --color-dark-bar: #26211D;
+  --color-gold: #B08D57;
+  --color-gold-hover: #987542;
+
+  --font-serif: "Bodoni Moda", "Cormorant Garamond", Georgia, serif;
+  --font-cormorant: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  --bg-primary: #F7F2EA;
+  --text-primary: #2A2420;
+  --text-muted: #7A6F64;
+  --accent-gold: #B08D57;
+  --border-hairline: rgba(122, 111, 100, 0.18);
+  --border-gold: rgba(176, 141, 87, 0.35);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F7F2EA;
+  color: #2A2420;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-cormorant {
+  font-family: var(--font-cormorant);
+}
+
+/* Hairline border utility */
+.border-hairline {
+  border-color: rgba(122, 111, 100, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F7F2EA;
+}
+::-webkit-scrollbar-thumb {
+  background: #CFC2B0;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B08D57;
+}
+
+/* Glassmorphism card utility matching reference */
+.glass-assessment-card {
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 45px -12px rgba(42, 36, 32, 0.12), 0 4px 12px rgba(42, 36, 32, 0.05);
+}
+
+.glass-pill {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Image reveal utilities */
+.reveal-img-wrapper {
+  overflow: hidden;
+  position: relative;
+}
+.reveal-img-wrapper img {
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
+}
+.reveal-img-wrapper:hover img {
+  transform: scale(1.04);
+}
+
+/* Custom cursor hide default on desktop when enabled */
+@media (pointer: fine) {
+  body.has-custom-cursor {
+    cursor: none;
+  }
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor input,
+  body.has-custom-cursor select,
+  body.has-custom-cursor textarea {
+    cursor: none;
+  }
+}
